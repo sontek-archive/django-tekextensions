@@ -1,10 +1,10 @@
 settings.py
 ====================
-`TEMPLATE_CONTEXT_PROCESSORS = (
-    'tekextensions.context_processors.admin_media_prefix',
-)
-INSTALLED_APPS = (
-    'tekextensions',
+`TEMPLATE_CONTEXT_PROCESSORS = (`
+`    'tekextensions.context_processors.admin_media_prefix',`
+`)`
+`INSTALLED_APPS = (`
+`    'tekextensions',`
 )`
 
 urls.py
@@ -13,10 +13,9 @@ urls.py
 
 forms.py
 ====================
-override any ModelChoiceField widget with SelectWithPopUp
-`from tekextensions.widgets import SelectWithPopUp
-from django import forms
+>override any ModelChoiceField widget with SelectWithPopUp
+`from tekextensions.widgets import SelectWithPopUp`
+`from django import forms`
 
-class CustomForm(forms.Form):
-    company = forms.ModelChoiceField(CustomModel.objects, widget=SelectWithPopUp)
-`
+`class CustomForm(forms.Form):`
+`    company = forms.ModelChoiceField(CustomModel.objects, widget=SelectWithPopUp)`
