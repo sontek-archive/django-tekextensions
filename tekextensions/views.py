@@ -12,7 +12,6 @@ def add_new_model(request, model_name):
         normal_model_name = model_name.capitalize()
     else:
         normal_model_name = model_name
-
     app_list = get_apps()
     for app in app_list:
         for model in get_models(app):
@@ -36,3 +35,4 @@ def add_new_model(request, model_name):
 
                 page_context = {'form': form, 'field': normal_model_name}
                 return render_to_response('popup.html', page_context, context_instance=RequestContext(request))
+    raise Exception('Did not find the model %s' % (normal_model_name))
