@@ -1,0 +1,6 @@
+*.pyc
+*.pyo
+*.db
+*.swp
+local_settings.py
+haystack/

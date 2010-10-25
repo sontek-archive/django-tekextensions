@@ -1,14 +1,15 @@
 from django import forms
 from django.template.loader import render_to_string
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
-class MultipleSelectWithPopUp(forms.SelectMultiple):
-    def __init__(self, model=None, template='addnew.html'):
+class PopUpBaseWidget(object):
+    def __init__(self, model=None, template='addnew.html', *args, **kwargs):
         self.model = model
         self.template = template
-        super(MultipleSelectWithPopUp, self).__init__()
+        super(PopUpBaseWidget, self).__init__(*args, **kwargs)
 
     def render(self, name, *args, **kwargs):
-        html = super(MultipleSelectWithPopUp, self).render(name, *args, **kwargs)
+        html = super(PopUpBaseWidget, self).render(name, *args, **kwargs)
 
         if not self.model:
             self.model = name
@@ -16,17 +17,11 @@ class MultipleSelectWithPopUp(forms.SelectMultiple):
         popupplus = render_to_string(self.template, {'field': name, 'model': self.model})
         return html+popupplus
 
-class SelectWithPopUp(forms.Select):
-    def __init__(self, model=None, template='addnew.html'):
-        self.model = model
-        self.template = template
-        super(SelectWithPopUp, self).__init__()
+class FilteredMultipleSelectWithPopUp(PopUpBaseWidget, FilteredSelectMultiple):
+    pass
 
-    def render(self, name, *args, **kwargs):
-        html = super(SelectWithPopUp, self).render(name, *args, **kwargs)
+class MultipleSelectWithPopUp(PopUpBaseWidget, forms.SelectMultiple):
+    pass
 
-        if not self.model:
-            self.model = name
-
-        popupplus = render_to_string(self.template, {'field': name, 'model': self.model})
-        return html+popupplus
+class SelectWithPopUp(PopUpBaseWidget, forms.Select):
+    pass
