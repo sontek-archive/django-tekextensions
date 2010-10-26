@@ -1,6 +1,7 @@
 admin popups
 ====================
 > if using grappeli, copy RelatedObjectLookups.js to your admin_media folder from django's admin media 
+
 settings.py
 --------------------
     TEMPLATE_CONTEXT_PROCESSORS = (
