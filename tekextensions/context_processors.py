@@ -12,7 +12,7 @@ def current_site(request):
 
     try:
         current_site = Site.objects.get_current()
-        return { name: current_site, }
+        return { context_name: current_site, }
     except Site.DoesNotExist:
         # always return a dict, no matter what!
-        return {name: RequestSite(request)}
+        return { context_name: RequestSite(request)}
