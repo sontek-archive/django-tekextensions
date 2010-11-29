@@ -11,22 +11,21 @@ def add_new_model(request, model_name, form=None):
     if not form:
         form = get_model_form(normal_model_name)
 
-    if form:
-        if request.method == 'POST':
-            form = form(request.POST)
-            if form.is_valid():
-                try:
-                    new_obj = form.save()
-                except forms.ValidationError, error:
-                    new_obj = None
+    if request.method == 'POST':
+        form = form(request.POST)
+        if form.is_valid():
+            try:
+                new_obj = form.save()
+            except forms.ValidationError, error:
+                new_obj = None
 
-                if new_obj:
-                    return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s");</script>' % \
-                        (escape(new_obj._get_pk_val()), escape(new_obj)))
+            if new_obj:
+                return HttpResponse('<script type="text/javascript">opener.dismissAddAnotherPopup(window, "%s", "%s");</script>' % \
+                    (escape(new_obj._get_pk_val()), escape(new_obj)))
 
-        else:
-            form = form()
+    else:
+        form = form()
 
-        page_context = {'form': form, 'field': normal_model_name}
-        return render_to_response('popup.html', page_context, context_instance=RequestContext(request))
+    page_context = {'form': form, 'field': normal_model_name}
+    return render_to_response('popup.html', page_context, context_instance=RequestContext(request))
 
