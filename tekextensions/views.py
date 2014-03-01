@@ -16,7 +16,7 @@ def add_new_model(request, model_name, form=None):
         if form.is_valid():
             try:
                 new_obj = form.save()
-            except forms.ValidationError, error:
+            except form.ValidationError as error:
                 new_obj = None
 
             if new_obj:
