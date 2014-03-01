@@ -17,6 +17,14 @@ class PopUpBaseWidget(object):
         popupplus = render_to_string(self.template, {'field': name, 'model': self.model})
         return html+popupplus
 
+    def _media(self):
+        js = ["admin/js/core.js", "admin/js/admin/RelatedObjectLookups.js"]
+
+        return forms.widgets.Media(
+            js=js
+        )
+    media = property(_media)
+
 class FilteredMultipleSelectWithPopUp(PopUpBaseWidget, FilteredSelectMultiple):
     pass
 
