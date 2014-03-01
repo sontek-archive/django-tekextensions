@@ -1,7 +1,8 @@
+{% load staticfiles %}
 <html>
 <head>
 <title>Add {{ field }}</title>
-<script src="{{ ADMIN_MEDIA_PREFIX }}js/admin/RelatedObjectLookups.js"></script>
+<script src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
 </head>
 <body>
 <h1>Add {{ field }}</h1>
