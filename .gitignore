@@ -2,5 +2,6 @@
 *.pyo
 *.db
 *.swp
+.idea
 local_settings.py
 haystack/
