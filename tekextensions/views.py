@@ -1,8 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 from django.utils.html import escape
+from django.forms import ValidationError
 from tekextensions.forms import get_model_form, normalize_model_name
 
 def add_new_model(request, model_name, form=None):
@@ -16,7 +16,7 @@ def add_new_model(request, model_name, form=None):
         if form.is_valid():
             try:
                 new_obj = form.save()
-            except form.ValidationError as error:
+            except ValidationError as error:
                 new_obj = None
 
             if new_obj:
